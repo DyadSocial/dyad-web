@@ -1,25 +1,15 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Dyad</title>
-        <meta name="description" content="A local social networking app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1>Dyad</h1>
-        <h3>A local social network</h3>
-       
-      </main>
-
-      <footer className={styles.footer}>
-        <p>Contact</p>
-      </footer>
-    </div>
+    <Container maxWidth="sm">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Dyad - A local social network.
+        </Typography>
+      </Box>
+    </Container>
   )
 }
