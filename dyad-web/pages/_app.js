@@ -3,10 +3,11 @@ import Head from 'next/head';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+
 const theme = createTheme({
   pallete: {
     primary: {
-      main: '#8FBCBB',
+      main: '#448d9b',
     },
     secondary: {
       main: '#8FBCBB',
@@ -15,7 +16,12 @@ const theme = createTheme({
       main: '#8FBCBB',
     },
   },
+  
 });
+
+function getTheme(){
+  return(theme);
+}
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -27,6 +33,7 @@ export default function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Component {...pageProps} />
+        
       </ThemeProvider>
     </>
   ); 
