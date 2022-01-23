@@ -13,4 +13,10 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+p {
+  padding: -10vw;
+  margin-top: -1vw;
 }

@@ -1,0 +1,36 @@
+.team-body {
+    width: 100vw;
+    font-size: 1.5vw;
+    text-align: justify;
+    background-color: #5C7AEA;
+    padding: 1vw;
+    margin-top: -2vw;
+  }
+
+  .team-title {
+      width: 100vw;
+      font-size: 1.5vw;
+      text-align: justify;
+      padding: 1vw;
+      background-color: #3D56B2;
+  }
+
+ .description-title{
+    width: 100vw;
+    font-size: 1.5vw;
+    text-align: center;
+    padding: 1vw;
+    background-color: #E6E6E6;
+ }
+
+ .description-body{
+    width: 100vw;
+    font-size: 1.5vw;
+    text-align: center;
+    background-color: #E6E6E6;
+    padding: 5vw;
+    margin-top: -5vw;
+    height: 100%;
+ }
+
+ 
