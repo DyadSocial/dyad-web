@@ -4,11 +4,15 @@ import Box from '@mui/material/Box';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import Link from '@mui/material/Link';
+import NextLink from 'next/link';
 
 function SeeAbout() {
   return (
     <Typography sx={{mt: 6, mb:3}} color="text.secondary">
-      Welcome to the home page for Dyad - A local social network. To see more info about this application, click <Link href="/about">here</Link>.
+      Welcome to the home page for Dyad - A local social network. To see more info about this application, click{' '}
+      <NextLink href="/about"> 
+        <Link href="/about">here</Link>
+      </NextLink>.
     </Typography>
   )
 }
