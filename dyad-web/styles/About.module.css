@@ -1,5 +1,5 @@
 .team-body {
-    width: 100vw;
+    width: auto;
     font-size: 1.5vw;
     text-align: justify;
     background-color: #5C7AEA;
@@ -8,7 +8,7 @@
   }
 
   .team-title {
-      width: 100vw;
+      width: auto;
       font-size: 1.5vw;
       text-align: justify;
       padding: 1vw;
@@ -16,7 +16,7 @@
   }
 
  .description-title{
-    width: 100vw;
+    width: auto;
     font-size: 1.5vw;
     text-align: center;
     padding: 1vw;
@@ -24,7 +24,7 @@
  }
 
  .description-body{
-    width: 100vw;
+    width: auto;
     font-size: 1.5vw;
     text-align: center;
     background-color: #E6E6E6;
