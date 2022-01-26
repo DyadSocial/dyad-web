@@ -116,7 +116,32 @@ export default function About() {
         </motion.div
         
         >
+      
+      <div className={styles["description-title"]}>
+        <h1>Project Related Resources</h1>
       </div>
+      <div className={styles["description-body"]}>
+        <motion.div
+          initial={{ opacity: 0, right: "20%" }}
+          animate={{ opacity: 1, right: 0 }}
+          transition={{ duration: 1.5, delay: 4 }}
+        >
+        
+        <p> 
+        <ul>
+          <li><a href="https://unr.primo.exlibrisgroup.com/permalink/01UNR_INST/adtd5q/cdi_proquest_journals_2568002148">"Should I Post or Ghost?”: Examining how privacy concerns impact social media engagement in US consumers</a> </li>
+          <li><a href="https://unr.primo.exlibrisgroup.com/permalink/01UNR_INST/adtd5q/cdi_crossref_primary_10_1016_j_jss_2018_08_028">Software engineering process models for mobile app development: A systematic literature review</a> </li>
+          <li><a href="https://www.inc.com/john-rampton/how-to-create-powerful-social-network-platform-in-.html">How to Create a Powerful Social Network Platform in 8 Steps</a> </li> 
+          <li><a href="https://wiki.archlinux.org/">ArchWiki</a></li>      
+          <li><a href="https://flutter.dev/">Flutter</a></li>
+        </ul>
+        </p>
+              
+        </motion.div>
+      </div>
+      </div>
+
+      
 
     </div>
 
