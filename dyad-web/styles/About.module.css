@@ -1,36 +1,62 @@
+@value colors: "./colors.css";
+@value global-black, global-light-black, global-dark-gray, global-gray, global-light-gray, global-dark-white, global-white, global-teal, global-cyan, global-light-blue, global-blue, global-red, global-orange, global-yellow, global-green, global-purple, global-font-family from colors;
+
+.page-title {
+   font-size: 2.5vw;
+   color: global-white;
+}
+.about-wrapper {
+   font-family: global-font-family;
+   width: 100%;
+   background-color: global-black;
+   position: absolute;
+   left: 0;
+   top: 0;
+   color: global-black;
+}
+
+.body-wrapper {
+   width: 80vw;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
 .team-body {
-    width: auto;
-    font-size: 1.5vw;
-    text-align: justify;
-    background-color: #5C7AEA;
-    padding: 1vw;
-    margin-top: -2vw;
-  }
+  width: auto;
+  font-size: 1.5vw;
+  text-align: justify;
+  background-color: global-white;
+  padding: 1vw 10vw;
+}
 
-  .team-title {
-      width: auto;
-      font-size: 1.5vw;
-      text-align: justify;
-      padding: 1vw;
-      background-color: #3D56B2;
-  }
+.team-title {
+  width: auto;
+  font-size: 1.5vw;
+  text-align: justify;
+  background-color: global-white;
+}
 
- .description-title{
-    width: auto;
-    font-size: 1.5vw;
-    text-align: center;
-    padding: 1vw;
-    background-color: #E6E6E6;
- }
+.team-members {
+   width: 100%;
+   display: flex;
+   justify-content: space-evenly;
+   padding-bottom: 4vh;
+}
 
- .description-body{
-    width: auto;
-    font-size: 1.5vw;
-    text-align: center;
-    background-color: #E6E6E6;
-    padding: 5vw;
-    margin-top: -5vw;
-    height: 100%;
- }
+.description-title {
+  width: auto;
+  font-size: 1.5vw;
+  text-align: center;
+  background-color: global-dark-white;
+}
 
- 
+.description-body {
+  padding: 1vw 10vw;
+  width: auto;
+  font-size: 1.5vw;
+  text-align: left;
+  background-color: global-dark-white;
+  height: 100%;
+  margin-bottom: 5vw;
+}
