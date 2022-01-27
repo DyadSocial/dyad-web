@@ -4,7 +4,10 @@ import Box from "@mui/material/Box";
 import * as React from "react";
 import Link from "@mui/material/Link";
 import NextLink from "next/link";
+import Image from "next/image";
+import constructionPic from '../assets/constructioncat.jpeg';
 import styles from "../styles/Home.module.css";
+
 
 export default function Home() {
   return (
@@ -25,6 +28,7 @@ export default function Home() {
           </NextLink>
           .
         </p>
+        <Image src={constructionPic} alt="Site Under Construction (Cat wearing hardhat)" />
       </Container>
     </div>
   );
