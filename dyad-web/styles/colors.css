@@ -1,0 +1,19 @@
+@value global-black: #2E3440;
+@value global-light-black: #3B4252;
+@value global-dark-gray: #434C5E;
+@value global-gray:#4C566A;
+@value global-light-gray: #D8DEE9;
+@value global-dark-white: #E5E9F0;
+@value global-white: #ECEFF4; 
+@value global-teal: #8FBCBB;
+@value global-cyan: #88C0D0;
+@value global-light-blue: #81A1C1;
+@value global-blue: #5E81AC;
+@value global-red: #BF616A;
+@value global-orange: #D08770;
+@value global-yellow: #EBCB8B;
+@value global-green: #A3BE8C;
+@value global-purple: #B48EAD;
+
+@value global-font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
