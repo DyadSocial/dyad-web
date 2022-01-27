@@ -8,4 +8,5 @@ module.exports = {
     return config
   },
   reactStrictMode: true,
+  exportTrailingSlash: true
 }
