@@ -1,0 +1,33 @@
+@value colors: "./colors.css";
+@value global-black, global-light-black, global-dark-gray, global-gray, global-light-gray, global-dark-white, global-white, global-teal, global-cyan, global-light-blue, global-blue, global-red, global-orange, global-yellow, global-green, global-purple, global-font-family from colors;
+
+.page-title {
+    font-size: 2.5vw;
+    color: global-white;
+ }
+ .about-wrapper {
+    font-family: global-font-family;
+    width: 100%;
+    background-color: global-black;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: global-black;
+    min-height: 100vh;
+ }
+
+ .login-wrapper {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .login-body {
+  width: 80vw;
+  font-size: 1.5vw;
+  text-align: center;
+  background-color: global-white;
+  padding: 1vw 10vw;
+}
