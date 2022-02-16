@@ -7,6 +7,7 @@ import NextLink from "next/link";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+
   return (
     <div className={styles["page-root"]}>
       <Container maxWidth="sm">
@@ -31,6 +32,14 @@ export default function Home() {
             alt=""
           />
         </center>
+        <br />
+        <p>
+          To login to account management, click{" "}
+          <NextLink href="/login">
+            <Link href="/login"> here</Link>
+          </NextLink>
+          .
+        </p>
       </Container>
     </div>
   );
