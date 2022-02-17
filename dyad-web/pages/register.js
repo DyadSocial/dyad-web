@@ -1,5 +1,5 @@
 // Referenced code for login logic at https://www.bezkoder.com/react-jwt-auth/
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -39,21 +39,41 @@ const userlength = value => {
   }
 }
 
+const passLength = value => {
+  if(value.length > 20){
+    return(
+    <div>
+      Password too long.
+    </div>);
+  }
+  else if(value.length>0 && value.length < 6){
+    return(
+      <div>
+        Password too short.
+      </div>
+    );
+  }
+  else{
+    return(
+      <div></div>
+    );
+  }
+}
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 const Register = (props) => {
     const form = useRef();
-    const checkBtn = useRef();
     const [username, setUsername] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState("");
+    const [created, setCreated] = useState(false);
+    const router = useRouter()
+    
     const onChangeUsername = (e) => {
       const username = e.target.value;
       setUsername(username);
-    };
-    const onChangeNumber = (e) => {
-      const phoneNumber = e.target.value;
-      setPhoneNumber(phoneNumber);
     };
     const onChangePassword = (e) => {
       const password = e.target.value;
@@ -64,11 +84,12 @@ const Register = (props) => {
       setMessage("");
       setSuccessful(false);
       form.current.validateAll();
-      if (checkBtn.current.context._errors.length === 0) {
-        AuthService.register(username, phoneNumber, password).then(
+      
+        AuthService.register(username, password).then(
           (response) => {
-            setMessage(response.data.message);
+            setMessage("Successful. Returning to login now.");
             setSuccessful(true);
+            returnToLogin();
           },
           (error) => {
             const resMessage =
@@ -81,8 +102,14 @@ const Register = (props) => {
             setSuccessful(false);
           }
         );
-      }
+        setCreated(true);
+      
     };
+
+    const returnToLogin = async () => {
+      await delay(5000);
+      router.back();
+    }
     return (
       <div className={styles["about-wrapper"]}>
           <center>
@@ -106,23 +133,13 @@ const Register = (props) => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="phoneNumber">Phone Number</label>
-                      <Input
-                        type="text"
-                        name="phoneNumber"
-                        value={phoneNumber}
-                        onChange={onChangeNumber}
-                        validations={[required]}
-                      />
-                    </div>
-                    <div>
                       <label htmlFor="password">Password</label>
                       <Input
                         type="password"
                         name="password"
                         value={password}
                         onChange={onChangePassword}
-                        validations={[required]}
+                        validations={[required, passLength]}
                       />
                     </div>
                     <div>
@@ -130,15 +147,18 @@ const Register = (props) => {
                     </div>
                   </div>
                 )}
-                {message && (
                   <div>
-                    <div
-                    >
-                      {message}
-                    </div>
+                      {successful && 
+                        <div>
+                        {message}
+                        </div>
+                      }
+                      {!successful &&
+                        <div>
+                        {message}
+                        </div>
+                      }
                   </div>
-                )}
-                <CheckButton style={{ display: "none" }} ref={checkBtn} />
               </Form>
           </div>
         </div>

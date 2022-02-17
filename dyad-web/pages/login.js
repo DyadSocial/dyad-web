@@ -41,12 +41,15 @@ const userlength = value => {
   }
 }
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
   const[username, setUsername] = useState("");
   const[password, setPassword] = useState("");
   const[message, setMessage] = useState("");
+  const router = useRouter()
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -56,15 +59,18 @@ const Login = (props) => {
     const password = e.target.value;
     setPassword(password);
   };
+
+  
+
   const handleLogin= (e) => {
     e.preventDefault();
     setMessage("");
-    this.form.validateAll();
+    form.current.validateAll();
     //Do something when no error, this case we try to validate.
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          useRouter().push("/account");
+      AuthService.login(username, password).then(
+        (response) => {
+          setMessage("Successful. Logging in.")
+          goToAccount()
         },
         error => {
           const resMessage =
@@ -76,8 +82,14 @@ const Login = (props) => {
           setMessage(resMessage);
         }
       );
-    } 
+
   };
+
+  const goToAccount = async () => {
+    await delay(5000);
+    router.push("/account");
+  }
+
   return (
       <div className={styles["about-wrapper"]}>
         <center>
@@ -85,6 +97,12 @@ const Login = (props) => {
         </center>
         <div className={styles["login-wrapper"]}>
           <div className={styles["login-body"]}>
+          <div>
+            <img
+              src={require("../public/assets/user.png")}
+              alt="a user icon"
+            />
+          </div>
             <Form
               onSubmit={handleLogin}
               ref={form} 
@@ -122,11 +140,6 @@ const Login = (props) => {
                   </div>
                 </div>
               )}
-              {/* Will not display, used for checking if form valid */}
-              <CheckButton
-                style={{ display: "none" }}
-                ref={checkBtn}
-              />
             </Form>
             <br />
             <p> Not registered? Click {" "}
@@ -134,6 +147,13 @@ const Login = (props) => {
                 <Link href="/register"> here</Link>
               </NextLink>
               .
+            </p>
+            <br />
+            <p>
+              {" "}
+              <NextLink href="/about">
+                <Link href="/about">About</Link>
+              </NextLink>
             </p>
           </div>
         </div>

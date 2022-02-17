@@ -1,18 +1,16 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-const API_URL = 'http://74.207.251.32/api/auth/';
+const API_URL = 'http://api.dyadsocial.com:8000/core/';
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + 'all');
+  getUserList() {
+    return axios.get(API_URL + 'users-list/', { headers: authHeader() });
   }
-  getUserBoard() {
-    return axios.get(API_URL + 'user', { headers: authHeader() });
+  getTokenRefresh() {
+    return axios.get(API_URL + 'token/refresh/', {headers: authHeader() });
   }
-  getModeratorBoard() {
-    return axios.get(API_URL + 'mod', { headers: authHeader() });
-  }
-  getAdminBoard() {
-    return axios.get(API_URL + 'admin', { headers: authHeader() });
+  getTokenVerify() {
+    return axios.get(API_URL + 'token/verify/', {headers: authHeader() });
   }
 }
+  
 export default new UserService();
