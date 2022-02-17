@@ -1,9 +1,9 @@
 import axios from "axios";
-const API_URL = "http://74.207.251.32/api/auth/";
+const API_URL = "http://api.dyadsocial.com:8000/core/";
 class AuthService {
   login(username, password) {
     return axios
-      .post(API_URL + "signin", {
+      .post(API_URL + "login/", {
         username,
         password
       })
@@ -15,12 +15,11 @@ class AuthService {
       });
   }
   logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem("logout");
   }
-  register(username, email, password) {
-    return axios.post(API_URL + "signup", {
+  register(username, password) {
+    return axios.post(API_URL + "register", {
       username,
-      email,
       password
     });
   }
