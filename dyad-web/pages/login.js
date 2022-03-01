@@ -2,12 +2,12 @@
 import React, { useRef, useState } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
 import styles from "../styles/Login.module.css";
-import { useRouter } from 'next/router'
+import { useRouter, withRouter } from 'next/router'
 import Link from "@mui/material/Link";
 import NextLink from "next/link";
+import { Loading } from 'react-loading-dot';
 
 const required = value => {
   if (!value) {
@@ -27,7 +27,7 @@ const userlength = value => {
       </div>
     );
   }
-  else if(value.length>0 && value.length < 3){
+  else if(value.length>0 && value.length < 4){
     return(
       <div>
         User too short.
@@ -43,12 +43,13 @@ const userlength = value => {
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-const Login = (props) => {
+export default function Login(){
   const form = useRef();
   const checkBtn = useRef();
   const[username, setUsername] = useState("");
   const[password, setPassword] = useState("");
   const[message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter()
 
   const onChangeUsername = (e) => {
@@ -65,6 +66,7 @@ const Login = (props) => {
   const handleLogin= (e) => {
     e.preventDefault();
     setMessage("");
+    setLoading(true);
     form.current.validateAll();
     //Do something when no error, this case we try to validate.
       AuthService.login(username, password).then(
@@ -72,22 +74,24 @@ const Login = (props) => {
           setMessage("Successful. Logging in.")
           goToAccount()
         },
-        error => {
+        (error) => {
+          console.log(error.message);
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
+            "Incorrect username or password." ||
             error.toString();
           setMessage(resMessage);
+          setLoading(false);
         }
       );
 
   };
 
   const goToAccount = async () => {
-    await delay(5000);
-    router.push("/account");
+    await delay(2000);
+    router.push({
+      pathname: '/account',
+      query: { name: username }
+    });
   }
 
   return (
@@ -129,9 +133,10 @@ const Login = (props) => {
                 />
               </div>
               <div>
+                {loading ? <Loading background="grey"/> :
                 <button>
-                  <span>Login</span>
-                </button>
+                  <div>Login</div>
+                </button>}
               </div>
               {message && (
                 <div>
@@ -161,5 +166,5 @@ const Login = (props) => {
     );
 }
 
-export default Login;
+
 

@@ -2,18 +2,64 @@
 import React, { useRef, useState } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
-import styles from "../styles/Login.module.css";
-import { useRouter } from 'next/router'
-import Link from "@mui/material/Link";
-import NextLink from "next/link";
+import styles from "../styles/Account.module.css";
+import { useRouter} from 'next/router'
+import { Loading } from 'react-loading-dot';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+
+const required = value => {
+  if (!value) {
+    return (
+      <div >
+        Field cannot be empty.
+      </div>
+    );
+  }
+};
+
+const passLength = value => {
+  if(value.length > 20){
+    return(
+    <div>
+      Password too long.
+    </div>);
+  }
+  else if(value.length>0 && value.length < 6){
+    return(
+      <div>
+        Password too short.
+      </div>
+    );
+  }
+  else{
+    return(
+      <div></div>
+    );
+  }
+}
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-const Account = (props) => {
+export default function Account(){
   const form = useRef();
-  const router = useRouter()
+  const router = useRouter();
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [changingPass, setChangingPass] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onChangeCurrentPassword = (e) => {
+    const currentPassword = e.target.value;
+    setCurrentPassword(currentPassword);
+  };
+
+  const onChangeNewPassword = (e) => {
+    const newPassword = e.target.value;
+    setNewPassword(newPassword);
+  };
 
   const handleLogout= (e) => {
     e.preventDefault();
@@ -21,22 +67,89 @@ const Account = (props) => {
     goToLogin();
   };
 
+  const handlePasswordChanging = (e) => {
+    e.preventDefault();
+    setChangingPass(true);
+  }
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+    //LOGIC: Here you should request api to see if current password is good, and also POST new pass
+    await delay(2000); //Simulating a POST req
+    setChangingPass(false);
+    setLoading(false);  
+  }
+
   const goToLogin = async () => {
     await delay(2000);
     router.push("/login");
   }
+
+  /*TODO:
+  1. Change password
+  2. Change  */
 
   return (
       <div className={styles["about-wrapper"]}>
         <center>
           <h1 className={styles["page-title"]}>Dyad - Login</h1>
         </center>
-        <center>
-          <button onClick={handleLogout}>Logout</button>
-        </center>
+        <div className={styles["account-body"]}>
+          <h2>Welcome, {AuthService.getCurrentUser}</h2>
+          <Stack spacing={2} alignItems="justify">
+            <Box><span>
+              <button className={styles["button-change"]} onClick={handlePasswordChanging}>Change Password</button>
+              </span>
+              {changingPass && (
+              <Form
+              onSubmit={handlePasswordChange}
+              ref={form} 
+              >
+              <div>
+                <label htmlFor="currentPassword">Current Password</label>
+                <Input
+                  type="text"
+                  name="currentPassword"
+                  value={currentPassword}
+                  onChange={onChangeCurrentPassword}
+                />
+              </div>
+              <div>
+                <label htmlFor="newPassword">New Password</label>
+                <Input
+                  type="password"
+                  name="newPassword"
+                  value={newPassword}
+                  onChange={onChangeNewPassword}
+                  validations={[required, passLength]}
+                />
+                <div>
+                  {loading ? <Loading background="grey"/> :
+                  <button>
+                    <div>Submit</div>
+                  </button>}
+                </div>
+                {message && (
+                  <div>
+                    <div>
+                      {message}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Form>
+            )}
+            </Box>
+            <Box><span>
+              <button className={styles["button-change"]} onClick={handleLogout}>Logout</button>
+              </span>
+            </Box>
+          </Stack>
+          
+        </div>
       </div>
     );
 }
-
-export default Account;
 

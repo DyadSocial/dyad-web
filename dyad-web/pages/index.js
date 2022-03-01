@@ -5,10 +5,12 @@ import * as React from "react";
 import Link from "@mui/material/Link";
 import NextLink from "next/link";
 import styles from "../styles/Home.module.css";
+import Login from "./login.js";
+import Account from "./account.js";
 
 export default function Home() {
-
-  return (
+  return <Login />
+  {/*}return (
     <div className={styles["page-root"]}>
       <Container maxWidth="sm">
         <center>
@@ -41,6 +43,6 @@ export default function Home() {
           .
         </p>
       </Container>
-    </div>
-  );
+  </div>*/}
+  
 }
