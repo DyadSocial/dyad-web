@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://api.dyadsocial.com:8000/core/";
+const API_URL = "https://api.dyadsocial.com/core/";
 class AuthService {
   login(username, password) {
     return axios

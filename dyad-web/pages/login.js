@@ -45,7 +45,6 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 
 export default function Login(){
   const form = useRef();
-  const checkBtn = useRef();
   const[username, setUsername] = useState("");
   const[password, setPassword] = useState("");
   const[message, setMessage] = useState("");
@@ -72,6 +71,7 @@ export default function Login(){
       AuthService.login(username, password).then(
         (response) => {
           setMessage("Successful. Logging in.")
+          localStorage.setItem("username", username);
           goToAccount()
         },
         (error) => {
@@ -119,7 +119,7 @@ export default function Login(){
                   name="username"
                   value={username}
                   onChange={onChangeUsername}
-                  validations={[required, userlength]}
+                  validations={[required]}
                 />
               </div>
               <div>

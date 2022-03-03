@@ -50,18 +50,30 @@ export default function Account(){
   const [changingPass, setChangingPass] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [match, setMatch] = useState(false);
 
   const onChangeCurrentPassword = (e) => {
     const currentPassword = e.target.value;
+    passwordMatch(newPassword, currentPassword);
     setCurrentPassword(currentPassword);
   };
 
   const onChangeNewPassword = (e) => {
     const newPassword = e.target.value;
+    passwordMatch(newPassword, currentPassword);
     setNewPassword(newPassword);
   };
 
-  const handleLogout= (e) => {
+  const passwordMatch = (value1, value2) =>{
+    if(value1 != value2){
+      setMatch(false);
+    }
+    else{
+      setMatch(true);
+    }
+  }
+
+  const handleLogout = (e) => {
     e.preventDefault();
     AuthService.logout();
     goToLogin();
@@ -72,8 +84,11 @@ export default function Account(){
     setChangingPass(true);
   }
 
+  
+
   const handlePasswordChange = async (e) => {
     e.preventDefault();
+    passwordMatch(newPassword, currentPassword);
     setLoading(true);
     setMessage("");
     //LOGIC: Here you should request api to see if current password is good, and also POST new pass
@@ -83,7 +98,7 @@ export default function Account(){
   }
 
   const goToLogin = async () => {
-    await delay(2000);
+    await delay(1000);
     router.push("/login");
   }
 
@@ -97,7 +112,7 @@ export default function Account(){
           <h1 className={styles["page-title"]}>Dyad - Login</h1>
         </center>
         <div className={styles["account-body"]}>
-          <h2>Welcome, {AuthService.getCurrentUser}</h2>
+          <h2>Welcome, {localStorage.getItem("username")}</h2>
           <Stack spacing={2} alignItems="justify">
             <Box><span>
               <button className={styles["button-change"]} onClick={handlePasswordChanging}>Change Password</button>
@@ -108,16 +123,17 @@ export default function Account(){
               ref={form} 
               >
               <div>
-                <label htmlFor="currentPassword">Current Password</label>
+                <label htmlFor="currentPassword">New Password</label>
                 <Input
-                  type="text"
+                  type="password"
                   name="currentPassword"
                   value={currentPassword}
                   onChange={onChangeCurrentPassword}
+                  validations={[required, passLength]}
                 />
               </div>
               <div>
-                <label htmlFor="newPassword">New Password</label>
+                <label htmlFor="newPassword">Confirm Password</label>
                 <Input
                   type="password"
                   name="newPassword"
@@ -126,7 +142,8 @@ export default function Account(){
                   validations={[required, passLength]}
                 />
                 <div>
-                  {loading ? <Loading background="grey"/> :
+                  {!match ? <div>Passwords do not match</div> : null}
+                  {loading && match? <Loading background="grey"/> :
                   <button>
                     <div>Submit</div>
                   </button>}
