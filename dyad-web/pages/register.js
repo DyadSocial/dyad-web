@@ -60,14 +60,17 @@ const passLength = value => {
   }
 }
 
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const Register = (props) => {
     const form = useRef();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [cpassword, setCPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState("");
+    const [match, setMatch] = useState(false);
     const [created, setCreated] = useState(false);
     const router = useRouter()
     
@@ -77,12 +80,19 @@ const Register = (props) => {
     };
     const onChangePassword = (e) => {
       const password = e.target.value;
+      passwordMatch(password, cpassword);
       setPassword(password);
+    };
+    const onChangeCPassword = (e) => {
+      const cpassword = e.target.value;
+      passwordMatch(password, cpassword);
+      setCPassword(cpassword);
     };
     const handleRegister = (e) => {
       e.preventDefault();
       setMessage("");
       setSuccessful(false);
+      passwordMatch(password, cpassword);
       form.current.validateAll();
       
         AuthService.register(username, password).then(
@@ -106,8 +116,22 @@ const Register = (props) => {
       
     };
 
+    const passwordMatch = (value1, value2) =>{
+      if(value1 != value2){
+        setMatch(false);
+      }
+      else{
+        setMatch(true);
+      }
+    };
+
     const returnToLogin = async () => {
       await delay(5000);
+      router.back();
+    }
+
+    const goBack = async () => {
+      await delay(1000);
       router.back();
     }
     return (
@@ -143,8 +167,21 @@ const Register = (props) => {
                       />
                     </div>
                     <div>
+                      <label htmlFor="cpassword">Confirm Password</label>
+                      <Input
+                        type="password"
+                        name="cpassword"
+                        value={cpassword}
+                        onChange={onChangeCPassword}
+                        validations={[required, passLength]}
+                      />
+                      {!match ? <div>Passwords do not match</div> : null}
+                    </div>
+                    <div>
                       <button>Sign Up</button>
                     </div>
+                    <br />
+                    
                   </div>
                 )}
                   <div>
@@ -160,6 +197,7 @@ const Register = (props) => {
                       }
                   </div>
               </Form>
+              <button onClick={goBack}>Back</button>
           </div>
         </div>
       </div>
