@@ -4,18 +4,12 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import AuthService from "../services/auth.service";
 import styles from "../styles/Account.module.css";
-<<<<<<< HEAD
 import Image from "next/image";
-=======
->>>>>>> 11fb484e4ab520dc464f8f3e18eeb6bb869d3c7f
 import { useRouter} from 'next/router'
 import { Loading } from 'react-loading-dot';
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-<<<<<<< HEAD
 import testPic from '../public/assets/jake.png';
-=======
->>>>>>> 11fb484e4ab520dc464f8f3e18eeb6bb869d3c7f
 
 const required = value => {
   if (!value) {
@@ -119,7 +113,6 @@ export default function Account(){
         <center>
           <h1 className={styles["page-title"]}>Dyad - Login</h1>
         </center>
-<<<<<<< HEAD
         <div>
           <div className={styles["account-body"]}>
             <h2 className={styles["welcome-title"]}>Welcome, {localStorage.getItem("username")}</h2>
@@ -209,62 +202,6 @@ export default function Account(){
             </Stack>
             
           </div>
-=======
-        <div className={styles["account-body"]}>
-          <h2>Welcome, {localStorage.getItem("username")}</h2>
-          <Stack spacing={2} alignItems="justify">
-            <Box><span>
-              <button className={styles["button-change"]} onClick={handlePasswordChanging}>Change Password</button>
-              </span>
-              {changingPass && (
-              <Form
-              onSubmit={handlePasswordChange}
-              ref={form} 
-              >
-              <div>
-                <label htmlFor="currentPassword">New Password</label>
-                <Input
-                  type="password"
-                  name="currentPassword"
-                  value={currentPassword}
-                  onChange={onChangeCurrentPassword}
-                  validations={[required, passLength]}
-                />
-              </div>
-              <div>
-                <label htmlFor="newPassword">Confirm Password</label>
-                <Input
-                  type="password"
-                  name="newPassword"
-                  value={newPassword}
-                  onChange={onChangeNewPassword}
-                  validations={[required, passLength]}
-                />
-                <div>
-                  {!match ? <div>Passwords do not match</div> : null}
-                  {loading && match? <Loading background="grey"/> :
-                  <button>
-                    <div>Submit</div>
-                  </button>}
-                </div>
-                {message && (
-                  <div>
-                    <div>
-                      {message}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Form>
-            )}
-            </Box>
-            <Box><span>
-              <button className={styles["button-change"]} onClick={handleLogout}>Logout</button>
-              </span>
-            </Box>
-          </Stack>
-          
->>>>>>> 11fb484e4ab520dc464f8f3e18eeb6bb869d3c7f
         </div>
       </div>
     );
