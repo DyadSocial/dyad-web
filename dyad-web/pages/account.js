@@ -158,7 +158,7 @@ export default function Account(){
     UserService.getDescription().then(
       (response) => {
         setMessage("Successful grab of biography.")
-        return response.data.Profile_Description;
+        setBiography(response.data.Profile_Description);
       },
       (error) => {
         console.log(error.message);

@@ -25,6 +25,7 @@ class AuthService {
     });
   }
   registerProfile(display_name, profile_description){
+    console.log(localStorage.getItem('jwt'));
     return axios.post(API_URL + "profile/create-user-profile", {
       display_name,
       profile_description

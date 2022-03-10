@@ -133,10 +133,11 @@ const Register = (props) => {
             setSuccessful(false);
           }
         );
-        await delay(5000);
+        await delay(10000);
         AuthService.login(username, password).then(
           (response) => {
             console.log("logged in");
+            //console.log(localStorage.getItem('jwt'));
           },
           (error) => {
             console.log("cant log in");
@@ -148,6 +149,8 @@ const Register = (props) => {
             returnToLogin();
           }
         );
+
+        AuthService.logout();
         
         setCreated(true);
       
