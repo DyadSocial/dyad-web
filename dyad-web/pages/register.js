@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
+import Textarea from "react-validation/build/textarea";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
 import styles from "../styles/Login.module.css";
@@ -60,6 +61,16 @@ const passLength = value => {
   }
 }
 
+const bioLength = value => {
+  if(value.length > 240){
+    return(
+      <div>
+        Biography too long.
+      </div>
+    );
+  }
+}
+
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -72,6 +83,9 @@ const Register = (props) => {
     const [message, setMessage] = useState("");
     const [match, setMatch] = useState(false);
     const [created, setCreated] = useState(false);
+    const [displayname, setDisplayName] = useState("");
+    const [biography, setBiography] = useState("");
+
     const router = useRouter()
     
     const onChangeUsername = (e) => {
@@ -88,7 +102,15 @@ const Register = (props) => {
       passwordMatch(password, cpassword);
       setCPassword(cpassword);
     };
-    const handleRegister = (e) => {
+    const onChangeDisplayName = (e) => {
+      const newdisplayname = e.target.value;
+      setDisplayName(newdisplayname);
+    }
+    const onChangeBiography = (e) => {
+      const newBio = e.target.value;
+      setBiography(newBio);
+    }
+    const handleRegister = async (e) => {
       e.preventDefault();
       setMessage("");
       setSuccessful(false);
@@ -99,7 +121,6 @@ const Register = (props) => {
           (response) => {
             setMessage("Successful. Returning to login now.");
             setSuccessful(true);
-            returnToLogin();
           },
           (error) => {
             const resMessage =
@@ -112,6 +133,22 @@ const Register = (props) => {
             setSuccessful(false);
           }
         );
+        await delay(5000);
+        AuthService.login(username, password).then(
+          (response) => {
+            console.log("logged in");
+          },
+          (error) => {
+            console.log("cant log in");
+          }
+        );
+        
+        AuthService.registerProfile(displayname, biography).then(
+          (response) => {
+            returnToLogin();
+          }
+        );
+        
         setCreated(true);
       
     };
@@ -154,6 +191,29 @@ const Register = (props) => {
                         value={username}
                         onChange={onChangeUsername}
                         validations={[required, userlength]}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="displayname">Display Name</label>
+                      <Input
+                        type="text"
+                        name="displayname"
+                        value={displayname}
+                        onChange={onChangeDisplayName}
+                        validations={[required, userlength]}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="newBiography">Tell us about yourself:</label>
+                      <Textarea
+                        type="text"
+                        name="newBiography"
+                        value={biography}
+                        onChange={onChangeBiography}
+                        rows="4"
+                        columns="50"
+                        style={{resize: "none"}}
+                        validations={[bioLength]}
                       />
                     </div>
                     <div>
