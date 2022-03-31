@@ -25,7 +25,8 @@
  }
 
  .login-body {
-  width: 80vw;
+  width: 50vw;
+  min-width: 500px;
   font-size: 1.5vw;
   text-align: center;
   background-color: global-white;
@@ -35,4 +36,36 @@
 .user-image {
    width: 10%;
    height: 10%;
+}
+
+.login-form {
+   background-color: global-light-gray;
+   border: none;
+   padding: 12px 15px;
+   margin: 10px 0 0 0;
+   width: 75%;
+   font-size: 1vw;
+}
+
+.login-submit {
+   background-color: global-blue;
+   border: 1px solid global-blue;
+   font-size: 1vw;
+   font-weight: bold;
+   padding: 10px 50px;
+   margin: 10px 0;
+   width: 75%;
+   color: global-white;
+}
+
+.form-error {
+   background-color: global-red;
+   border-color: global-white;
+   padding: 5px 8px;
+   font-size: 0.8vw;
+   font-weight: bold;
+   color: global-white;
+   width:75%;
+   margin: auto;
+   margin-top: 0;
 }
