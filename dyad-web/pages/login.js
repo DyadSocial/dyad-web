@@ -12,7 +12,7 @@ import { Loading } from 'react-loading-dot';
 const required = value => {
   if (!value) {
     return (
-      <div >
+      <div className={styles["form-error"]} >
         Field cannot be empty.
       </div>
     );
@@ -113,18 +113,21 @@ export default function Login(){
             >
               {/*See above const form = useRef() */}
               <div>
-                <label htmlFor="username">Username</label>
                 <Input
+                  className={styles["login-form"]}
+                  placeholder="Username"
                   type="text"
                   name="username"
                   value={username}
                   onChange={onChangeUsername}
+                  onFocusOut={() => alert("hi")}
                   validations={[required]}
                 />
               </div>
               <div>
-                <label htmlFor="password">Password</label>
                 <Input
+                  className={styles["login-form"]}
+                  placeholder="Password"
                   type="password"
                   name="password"
                   value={password}
@@ -134,8 +137,8 @@ export default function Login(){
               </div>
               <div>
                 {loading ? <Loading background="grey"/> :
-                <button>
-                  <div>Login</div>
+                <button className={styles["login-submit"]}>
+                  Login
                 </button>}
               </div>
               {message && (
