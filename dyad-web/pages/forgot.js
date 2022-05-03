@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import * as React from "react";
 import styles from "../styles/About.module.css";
 
+//Forgot login page. Unfinished
 export default function Forgot() {
   return (
     <div className={styles["about-wrapper"]}>

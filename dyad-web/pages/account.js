@@ -14,6 +14,8 @@ import Stack from "@mui/material/Stack";
 import testPic from '../public/assets/user.png';
 import { runPullImage } from "../grpc-client/client.js";
 
+//Const functions for validators during registration and login.
+//Cannot have an empty field
 const required = value => {
   if (!value) {
     return (
@@ -24,6 +26,7 @@ const required = value => {
   }
 };
 
+//Password length validator
 const passLength = value => {
   if(value.length > 20){
     return(
@@ -45,6 +48,7 @@ const passLength = value => {
   }
 };
 
+//Biography length validator
 const bioLength = value => {
   if(value.length > 240){
     return(
@@ -55,10 +59,13 @@ const bioLength = value => {
   }
 }
 
-
+//Delay helper function
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+//The account page shows the user's account when logging in for account management. As for now, the website's functionality does not include password changing or biography editing,
+//as the API endpoint had trouble with CORS. Users will only be able to create an account and login.
 export default function Account(){
+  //State variables
   const form = useRef();
   const router = useRouter();
   const [oldPassword, setOldPassword] = useState("");
@@ -72,10 +79,12 @@ export default function Account(){
   const [changingBio, setChangingBio] = useState(false);
   const [username, setUsername] = useState("");
 
+  //Local storage grab for username
   useEffect (() => {
     setUsername(localStorage.getItem("username"));
   });
 
+  //State setting functions
   const onChangeOldPassword = (e) => {
     const oldPassword = e.target.value;
     setOldPassword(oldPassword);
@@ -98,6 +107,7 @@ export default function Account(){
     setBiography(newBio);
   }
 
+  //Validator to make sure passwords match
   const passwordMatch = (value1, value2) =>{
     if(value1 != value2){
       setMatch(false);
@@ -107,17 +117,20 @@ export default function Account(){
     }
   }
 
+  //On logout, remove JWT from authentication in localstorage and redirect to login screen
   const handleLogout = (e) => {
     e.preventDefault();
     AuthService.logout();
     goToLogin();
   };
 
+  //Password change helper to display a dropdown box
   const handlePasswordChanging = (e) => {
     e.preventDefault();
     setChangingPass(true);
   }
 
+  //Password change first validates that old and new password are okay, and confirms. 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     passwordMatch(newPassword, newConfirmPassword);
@@ -129,11 +142,13 @@ export default function Account(){
     setLoading(false);  
   }
 
+  //Dropdown box for a biography change
   const handleBiographyChanging = (e) => {
     e.preventDefault();
     setChangingBio(true);
   }
 
+  //Biography is changing, call API endpoint to reset for account
   const handleBiographyChange = async (e) => {
     e.preventDefault();
     //Logic for API call to change biography
@@ -153,6 +168,7 @@ export default function Account(){
     setLoading(false);
   }
 
+  //Unused; Get biography from backend; API endpoint was malfunctioning due to CORS errors.
   const getBiography = async (e) => {
     e.preventDefault();
     UserService.getDescription().then(
@@ -170,6 +186,7 @@ export default function Account(){
     );
   }
 
+  //Reroute to login
   const goToLogin = async () => {
     await delay(1000);
     router.push("/login");

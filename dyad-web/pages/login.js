@@ -9,6 +9,7 @@ import Link from "@mui/material/Link";
 import NextLink from "next/link";
 import { Loading } from 'react-loading-dot';
 
+//Validator functions for password and usernames
 const required = value => {
   if (!value) {
     return (
@@ -43,7 +44,9 @@ const userlength = value => {
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+//Login page allows a user to login to their account if they have created one beforehand. This account is cross compatible with mobile accounts, uses same backend.
 export default function Login(){
+  //State variables
   const form = useRef();
   const[username, setUsername] = useState("");
   const[password, setPassword] = useState("");
@@ -60,8 +63,7 @@ export default function Login(){
     setPassword(password);
   };
 
-  
-
+  //Handle a login when button is submitted by calling api and providing user and password
   const handleLogin= (e) => {
     e.preventDefault();
     setMessage("");
@@ -86,6 +88,7 @@ export default function Login(){
 
   };
 
+  //If authenticated, go to account page
   const goToAccount = async () => {
     await delay(2000);
     router.push({

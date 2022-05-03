@@ -8,6 +8,8 @@ import AuthService from "../services/auth.service";
 import styles from "../styles/Login.module.css";
 import { useRouter } from 'next/router'
 
+//Validator functions
+//Field cannot be empty validator
 const required = value => {
   if (!value) {
     return (
@@ -18,6 +20,7 @@ const required = value => {
   }
 };
 
+//Username should not be too long or too short
 const userlength = value => {
   if(value.length > 20){
     return(
@@ -40,6 +43,7 @@ const userlength = value => {
   }
 }
 
+//Password length should not be too long or too short
 const passLength = value => {
   if(value.length > 20){
     return(
@@ -61,6 +65,7 @@ const passLength = value => {
   }
 }
 
+//Biography cannot be too long
 const bioLength = value => {
   if(value.length > 240){
     return(
@@ -74,7 +79,10 @@ const bioLength = value => {
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+//Register page allows a user to register an account with Dyad. As for now, website only allows a user to login and register. For any account editing, they should use the mobile app.
+//During demos, instructors said it may not be necesssary because you can already do it all on the mobile app.
 const Register = (props) => {
+    //State vars for RegisterPage
     const form = useRef();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -88,6 +96,7 @@ const Register = (props) => {
 
     const router = useRouter()
     
+    //State setter functions
     const onChangeUsername = (e) => {
       const username = e.target.value;
       setUsername(username);
@@ -110,6 +119,7 @@ const Register = (props) => {
       const newBio = e.target.value;
       setBiography(newBio);
     }
+    //Function for handling when the submit button is pressed after registering and clearing all validators. Call API endpoint to create an account then redirect to login page.
     const handleRegister = async (e) => {
       e.preventDefault();
       setMessage("");
@@ -134,6 +144,7 @@ const Register = (props) => {
           }
         );
         await delay(10000);
+        //AuthService log in
         AuthService.login(username, password).then(
           (response) => {
             console.log("logged in");
@@ -144,6 +155,7 @@ const Register = (props) => {
           }
         );
         
+        //Authservice register profile then return to login
         AuthService.registerProfile(displayname, biography).then(
           (response) => {
             returnToLogin();
@@ -156,6 +168,7 @@ const Register = (props) => {
       
     };
 
+    //Confirm password when creating to make sure they didn't type in wrong.
     const passwordMatch = (value1, value2) =>{
       if(value1 != value2){
         setMatch(false);
@@ -165,11 +178,13 @@ const Register = (props) => {
       }
     };
 
+    //Go to login
     const returnToLogin = async () => {
       await delay(5000);
       router.back();
     }
 
+    //Go back one page
     const goBack = async () => {
       await delay(1000);
       router.back();
