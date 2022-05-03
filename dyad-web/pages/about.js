@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import ArrowCircleDownOutlined from '@mui/icons-material/ArrowCircleDownOutlined';
 import Image from 'next/image';
 
+//Array of events for building our timeline using Timeline @mui/lab
 let events = [
   //Event 1
   {
@@ -53,12 +54,13 @@ let events = [
   //Event 8
   {
     title: 'Innovation Day',
-    event: 'The team presented their project at UNR\'s Innovation Day, with the 25+ projects of their peers.',
+    event: 'The team presented their project at UNR\'s Innovation Day, with the 25+ projects of their peers. Dyad featured a fully functioning UI, with the ability to edit your profile, view other profiles, create text & image posts, as well as instant messsaging.',
     date: 'May 2022',
   },
 
 ]
 
+//About page describes the team's progress and important documents
 export default function About() {
   return (
     <div className={styles["about-wrapper"]}>
@@ -161,6 +163,7 @@ export default function About() {
               </p>
             </div>
             <div className={styles["description-title"]}>
+              {/* Here is the timeline for our project. Describes development of project throughout semesters.*/}
               <h1>Project Progress</h1>
               <Timeline position="alternate">
                 {/* Event 1 */}
@@ -335,6 +338,7 @@ export default function About() {
             </div>
             <div className={styles["description-title"]}>
               <h1>Project Poster & Videos</h1>
+              {/* Embedded youtube videos for the project video and lightning talk, as well as project poster.*/}
             </div>
             <h2>Project Video</h2>
             <iframe width="100%" height="1080" src="https://www.youtube.com/embed/wDuLacgCqwg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
