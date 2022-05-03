@@ -101,12 +101,6 @@ export default function Login(){
         </center>
         <div className={styles["login-wrapper"]}>
           <div className={styles["login-body"]}>
-          <div>
-            <img
-              src={require("../public/assets/user.png")}
-              alt="a user icon"
-            />
-          </div>
             <Form
               onSubmit={handleLogin}
               ref={form} 

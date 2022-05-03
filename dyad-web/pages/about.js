@@ -5,6 +5,7 @@ import styles from "../styles/About.module.css";
 import { Timeline, TimelineItem, TimelineConnector, TimelineContent, TimelineDot, TimelineSeparator, TimelineOppositeContent } from "@mui/lab";
 import Typography from '@mui/material/Typography';
 import ArrowCircleDownOutlined from '@mui/icons-material/ArrowCircleDownOutlined';
+import Image from 'next/image';
 
 let events = [
   //Event 1
@@ -51,8 +52,8 @@ let events = [
   },
   //Event 8
   {
-    title: 'Innevation Day',
-    event: 'The team presented their project at UNR\'s Innevation Day, with the 25+ projects of their peers.',
+    title: 'Innovation Day',
+    event: 'The team presented their project at UNR\'s Innovation Day, with the 25+ projects of their peers.',
     date: 'May 2022',
   },
 
@@ -333,12 +334,17 @@ export default function About() {
               </Timeline>
             </div>
             <div className={styles["description-title"]}>
-              <h1>Project Poster & Video</h1>
+              <h1>Project Poster & Videos</h1>
             </div>
+            <h2>Project Video</h2>
+            <iframe width="100%" height="1080" src="https://www.youtube.com/embed/wDuLacgCqwg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h2>Lightning Talk</h2>
+            <iframe width="100%" height="1080" src="https://www.youtube.com/embed/smG-Bs_EzCc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <h2>Project Poster</h2>
+            <Image src="/Slide1.jpg" alt="Dyad Poster" width="1728" height="1296"/>
           </div>
         </div>
       </center>
     </div>
-    
   );
 }
