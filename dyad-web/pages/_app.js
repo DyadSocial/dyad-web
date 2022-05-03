@@ -3,7 +3,7 @@ import Head from 'next/head';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-
+//Color theme for web app
 const theme = createTheme({
   pallete: {
     primary: {
