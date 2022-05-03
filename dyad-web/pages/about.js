@@ -341,7 +341,7 @@ export default function About() {
             <h2>Lightning Talk</h2>
             <iframe width="100%" height="1080" src="https://www.youtube.com/embed/smG-Bs_EzCc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h2>Project Poster</h2>
-            <Image src="/Slide1.jpg" alt="Dyad Poster" width="1728" height="1296"/>
+            <Image src="../Slide1.jpg" alt="Dyad Poster" width="1728" height="1296"/>
           </div>
         </div>
       </center>
